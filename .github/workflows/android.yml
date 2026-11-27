@@ -1,0 +1,40 @@
+name: Compiler l'appli Android
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['README.md']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21 }
+      - name: Installer les dépendances
+        run: npm ci
+      - name: Vérifier les calculs 
+        run: npm test
+      - name: Préparer le projet Android (Capacitor, icône, signature)
+        run: npm run android:prepare
+      - name: Compiler l'APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+      - name: Publier une version téléchargeable
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          mkdir -p sortie
+          APK="sortie/nettoyage-clim-${VERSION}-build${{ github.run_number }}.apk"
+          cp android/app/build/outputs/apk/debug/app-debug.apk "$APK"
+          gh release create "v${VERSION}-build${{ github.run_number }}" "$APK" \
+            --title "Nettoyage clim ${VERSION} (build ${{ github.run_number }})" \
+            --notes "Téléphone Android : télécharger le .apk et l'ouvrir. Les nouvelles versions s'installent par-dessus. Commit ${GITHUB_SHA::7}."

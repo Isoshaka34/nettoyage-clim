@@ -1,0 +1,8 @@
+{
+  "appId": "fr.nettoyageclim.app",
+  "appName": "Nettoyage clim",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

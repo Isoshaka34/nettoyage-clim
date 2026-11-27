@@ -1,0 +1,89 @@
+/* Nettoyage clim — style « étiquette de comptoir ». Polices système : marche hors ligne. */
+:root{
+  --fond:#eceeed; --carte:#ffffff; --encre:#1b2125; --gris:#5b666c; --trait:#d6dbd9;
+  --accent:#0a6f8f; --etiquette:#ffd94a; --vert:#1d7a42; --vert-fond:#e1f2e7; --ambre:#6b4c00; --ambre-fond:#fbefcc; --rouge:#b0271f;
+  --mono:ui-monospace,"Roboto Mono","DejaVu Sans Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--fond);color:var(--encre);font-family:system-ui,-apple-system,Roboto,"Segoe UI",sans-serif;font-size:16px;line-height:1.4}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.haut{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding:calc(14px + env(safe-area-inset-top)) 16px 10px}
+.marque{margin:0;font-weight:800;font-size:26px;line-height:1;text-transform:uppercase;letter-spacing:-.01em}
+.marque em{font-style:normal;color:var(--accent)}
+.sous{margin:3px 0 0;font-size:12px;color:var(--gris)}
+main{padding:0 16px calc(88px + env(safe-area-inset-bottom));display:block}
+.vue{display:flex;flex-direction:column;gap:12px}
+.cachee{display:none}
+.titre{margin:6px 0 0;font-size:20px;font-weight:800;text-transform:uppercase}
+.carte{background:var(--carte);border:1px solid var(--trait);border-radius:14px;padding:12px 14px}
+.bloc{margin:0 0 6px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.02em;color:var(--gris)}
+.aide{margin:6px 0 0;font-size:12px;color:var(--gris)}
+
+/* Compteurs − 0 + */
+.ligne{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px}
+.ligne+.ligne{border-top:1px solid var(--trait)}
+.ligne .nom{font-weight:650;font-size:15px}
+.ligne .nom small{display:block;font-weight:400;font-size:12px;color:var(--gris)}
+.compteur{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.compteur button{width:44px;height:44px;border-radius:10px;border:1px solid var(--trait);background:var(--fond);font-size:22px;font-weight:700;line-height:1}
+.compteur button:active{background:var(--trait)}
+.compteur output{min-width:34px;text-align:center;font-family:var(--mono);font-size:20px;font-weight:700}
+.ligne.secondaire .nom{font-weight:500;font-size:14px;padding-left:12px;border-left:3px solid var(--etiquette)}
+
+/* Champs */
+.champ{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--gris);margin:4px 0 8px}
+.champ input,.champ textarea{height:46px;padding:0 14px;border-radius:12px;border:2px solid var(--trait);background:var(--carte);font-size:16px;color:var(--encre)}
+.champ input:focus,.champ textarea:focus{border-color:var(--accent);outline:none}
+.champ.court input{max-width:140px;font-family:var(--mono)}
+.suggestions{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;border:1px solid var(--trait);margin-bottom:8px}
+.suggestions:empty{display:none}
+.suggestions button{min-height:44px;text-align:left;padding:8px 12px;border:0;background:var(--carte);font-size:15px}
+.suggestions button+button{border-top:1px solid var(--trait)}
+.suggestions button small{color:var(--gris);margin-left:6px}
+.distance{margin:0 0 6px;font-size:14px}
+.distance b{font-family:var(--mono)}
+.pastille{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;border-radius:4px;padding:2px 6px;margin-left:4px;background:var(--vert);color:#fff;vertical-align:1px}
+.pastille.hors{background:var(--rouge)}
+
+/* Résultat */
+.resultat{background:var(--carte);border:2px solid var(--encre);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.entete{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.libelle{margin:0;font-weight:800;text-transform:uppercase;font-size:15px}
+.meta{margin:3px 0 0;font-size:12px;color:var(--gris)}
+.etiquette{background:var(--etiquette);border-radius:6px 6px 6px 0;padding:6px 12px;text-align:right;min-width:110px;flex-shrink:0}
+.etiquette b{display:block;font-family:var(--mono);font-size:30px;line-height:1.05}
+.etiquette small{font-family:var(--mono);font-size:11px}
+.detail{border:1px solid var(--trait);border-radius:10px;overflow:hidden;font-size:13px}
+.detail:empty{display:none}
+.detail div{display:flex;justify-content:space-between;gap:8px;padding:7px 10px}
+.detail div+div{border-top:1px solid var(--trait)}
+.detail span:last-child{font-family:var(--mono);white-space:nowrap}
+.detail .remise span:last-child{color:var(--vert)}
+.detail .total{background:var(--fond);font-weight:700}
+.alerte{font-size:12px;background:var(--ambre-fond);color:var(--ambre);border-radius:8px;padding:7px 9px;margin:0 0 6px}
+.rang{display:flex;gap:8px;flex-wrap:wrap}
+.bouton{min-height:46px;padding:0 16px;border-radius:12px;border:2px solid var(--encre);background:var(--carte);font-weight:700}
+.bouton.plein{background:var(--encre);color:#fff;flex:1}
+.bouton.petit{min-height:40px;padding:0 12px;font-size:13px;border-width:1px;border-color:var(--trait)}
+.bouton:disabled{opacity:.4}
+
+/* Réglages */
+.reglage{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:54px}
+.reglage+.reglage{border-top:1px solid var(--trait)}
+.reglage label{font-size:14px;flex:1}
+.reglage label small{display:block;font-size:11px;color:var(--gris)}
+.reglage .saisie{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:14px;color:var(--gris)}
+.reglage input{width:84px;height:44px;border-radius:10px;border:2px solid var(--trait);text-align:right;padding:0 10px;font-family:var(--mono);font-size:16px;color:var(--encre)}
+.reglage input:focus{border-color:var(--accent);outline:none}
+
+/* Onglets bas */
+.onglets{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 16px calc(8px + env(safe-area-inset-bottom));background:var(--encre)}
+.onglets button{min-height:48px;border:0;border-radius:10px;background:transparent;color:#c9d0d3;font-weight:800;text-transform:uppercase;font-size:14px}
+.onglets button[aria-current="page"]{background:var(--etiquette);color:var(--encre)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--encre);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw;text-align:center}
+.toast.visible{opacity:1}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+.reglage .unite{display:inline-block;width:24px}
+.champ textarea{height:auto;min-height:64px;padding:10px 14px;resize:vertical;font:inherit;font-size:16px}
+.champ input,.champ textarea{width:100%;min-width:0}

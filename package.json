@@ -1,0 +1,19 @@
+{
+  "name": "nettoyage-clim",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Estimation du prix de nettoyage / entretien de climatisation (appli Android)",
+  "scripts": {
+    "test": "node tests/logic.test.js",
+    "android:prepare": "npx cap add android && node scripts/patch-android.mjs && npx capacitor-assets generate --android --iconBackgroundColor '#1d7a8c' --iconBackgroundColorDark '#1d7a8c' && npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/share": "^7.0.4"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^7.0.0"
+  }
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b2125">
+<title>Nettoyage clim</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="haut">
+  <div>
+    <h1 class="marque">Nettoyage <em>clim</em></h1>
+    <p class="sous">Nettoyage / entretien climatisation · prix TTC</p>
+  </div>
+  <button type="button" class="bouton petit" id="raz">Effacer</button>
+</header>
+
+<main>
+  <section id="vue-estimation" class="vue">
+    <div class="carte">
+      <h2 class="bloc">Unités intérieures</h2>
+      <div id="interieures"></div>
+    </div>
+
+    <div class="carte">
+      <h2 class="bloc">Groupes extérieurs</h2>
+      <div id="exterieures"></div>
+      <p class="aide">Accès difficile : grande échelle, toiture, hauteur.</p>
+    </div>
+
+    <div class="carte">
+      <h2 class="bloc">Client</h2>
+      <label class="champ">Ville du client
+        <input type="search" id="ville" autocomplete="off" autocapitalize="words" placeholder="ex. Mauguio, Sommières, Nîmes">
+      </label>
+      <div class="suggestions" id="suggestions" role="listbox" aria-label="Villes trouvées"></div>
+      <p class="distance" id="distance" aria-live="polite">Distance non renseignée : déplacement compté comme compris.</p>
+      <label class="champ court"><span id="libelle-km">Distance (km, modifiable)</span>
+        <input type="number" id="km" inputmode="decimal" min="0" step="1" placeholder="—">
+      </label>
+    </div>
+
+    <div class="resultat" id="resultat" aria-live="polite">
+      <div class="entete">
+        <div>
+          <p class="libelle">Estimation</p>
+          <p class="meta" id="resume">Saisis les unités</p>
+        </div>
+        <div class="etiquette"><b id="prix">0 €</b><small>TTC</small></div>
+      </div>
+      <div class="detail" id="detail"></div>
+      <div id="alertes"></div>
+      <div class="rang">
+        <button type="button" class="bouton plein" id="partager">Envoyer au client</button>
+        <button type="button" class="bouton" id="copier">Copier</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="vue-reglages" class="vue cachee">
+    <h2 class="titre">Mes infos</h2>
+    <div class="carte">
+      <label class="champ">Ville de départ (calcul des km)
+        <input type="search" id="depart" autocomplete="off" autocapitalize="words"></label>
+      <div class="suggestions" id="suggestions-depart"></div>
+      <label class="champ">Signature des messages (nom, entreprise, téléphone)
+        <textarea id="signature" rows="3" placeholder="Prénom Nom&#10;Mon entreprise&#10;06 00 00 00 00"></textarea></label>
+      <label class="champ">Mention sous le prix (vide = aucune)
+        <input type="text" id="mention" autocomplete="off"></label>
+    </div>
+    <h2 class="titre">Réglages des prix</h2>
+    <p class="aide">Prix TTC. Ils restent enregistrés sur le téléphone.</p>
+    <div class="carte" id="reglages"></div>
+    <div class="rang">
+      <button type="button" class="bouton plein" id="enregistrer">Enregistrer</button>
+      <button type="button" class="bouton" id="defaut">Prix de la grille</button>
+    </div>
+    <p class="aide" id="etat-reglages"></p>
+  </section>
+</main>
+
+<nav class="onglets" aria-label="Navigation">
+  <button type="button" data-vue="estimation" aria-current="page">Estimation</button>
+  <button type="button" data-vue="reglages">Réglages</button>
+</nav>
+
+<div class="toast" id="toast" role="status"></div>
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
